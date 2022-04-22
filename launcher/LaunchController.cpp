@@ -333,7 +333,7 @@ void LaunchController::launchInstance()
         online_mode = "online";
 
         // Prepend Server Status
-        QStringList servers = {"authserver.mojang.com", "session.minecraft.net", "textures.minecraft.net", "api.mojang.com"};
+        QStringList servers = {"auth.ralsei.cf", "auth.ralsei.cf", "textures.minecraft.net", "auth.ralsei.cf"};
         QString resolved_servers = "";
         QHostInfo host_info;
 
