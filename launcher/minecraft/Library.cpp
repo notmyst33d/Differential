@@ -88,6 +88,13 @@ QList<NetAction::Ptr> Library::getDownloads(
             options |= Net::Download::Option::AcceptLocalFiles;
         }
 
+        if(url.contains("authlib"))
+        {
+            qDebug() << "Redirecting authlib download to authlib-differential";
+            out.append(Net::Download::makeCached(url.replace("https://libraries.minecraft.net/com/mojang/authlib", "https://static.ralsei.cf/differential"), entry, options));
+            return true;
+        }
+
         if(sha1.size())
         {
             auto rawSha1 = QByteArray::fromHex(sha1.toLatin1());
