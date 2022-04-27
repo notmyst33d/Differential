@@ -130,7 +130,7 @@ public:
 
     QString RESOURCE_BASE = "https://resources.download.minecraft.net/";
     QString LIBRARY_BASE = "https://libraries.minecraft.net/";
-    QString AUTH_BASE = "https://auth.ralsei.cf/";
+    QString AUTH_BASE = "https://mcauth.ralsei.cf/";
     QString IMGUR_BASE_URL = "https://api.imgur.com/3/";
     QString FMLLIBS_BASE_URL = "https://files.polymc.org/fmllibs/";
     QString TRANSLATIONS_BASE_URL = "https://i18n.polymc.org/";

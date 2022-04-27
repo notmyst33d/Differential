@@ -17,7 +17,7 @@ QString MinecraftProfileStep::describe() {
 
 
 void MinecraftProfileStep::perform() {
-    auto url = QUrl("https://auth.ralsei.cf/minecraft/profile");
+    auto url = QUrl("https://mcauth.ralsei.cf/minecraft/profile");
     QNetworkRequest request = QNetworkRequest(url);
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
     request.setRawHeader("Authorization", QString("Bearer %1").arg(m_data->yggdrasilToken.token).toUtf8());
