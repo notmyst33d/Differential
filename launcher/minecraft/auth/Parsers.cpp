@@ -242,7 +242,7 @@ namespace {
 /**
 Uses session server for skin/cape lookup instead of profile,
 because locked Mojang accounts cannot access profile endpoint
-(https://api.minecraftservices.com/minecraft/profile/)
+(https://mcauth.ralsei.cf/minecraft/profile/)
 
 ref: https://wiki.vg/Mojang_API#UUID_to_Profile_and_Skin.2FCape
 
@@ -431,7 +431,7 @@ bool parseRolloutResponse(QByteArray & data, bool& result) {
     QJsonParseError jsonError;
     QJsonDocument doc = QJsonDocument::fromJson(data, &jsonError);
     if(jsonError.error) {
-        qWarning() << "Failed to parse response from https://api.minecraftservices.com/rollout/v1/msamigration as JSON: " << jsonError.errorString();
+        qWarning() << "Failed to parse response from https://mcauth.ralsei.cf/rollout/v1/msamigration as JSON: " << jsonError.errorString();
         return false;
     }
 
@@ -460,7 +460,7 @@ bool parseMojangResponse(QByteArray & data, Katabasis::Token &output) {
 #endif
     QJsonDocument doc = QJsonDocument::fromJson(data, &jsonError);
     if(jsonError.error) {
-        qWarning() << "Failed to parse response from api.minecraftservices.com/launcher/login as JSON: " << jsonError.errorString();
+        qWarning() << "Failed to parse response from mcauth.ralsei.cf/launcher/login as JSON: " << jsonError.errorString();
         return false;
     }
 

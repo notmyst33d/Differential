@@ -17,7 +17,7 @@ QString LauncherLoginStep::describe() {
 }
 
 void LauncherLoginStep::perform() {
-    auto requestURL = "https://api.minecraftservices.com/launcher/login";
+    auto requestURL = "https://mcauth.ralsei.cf/launcher/login";
     auto uhs = m_data->mojangservicesToken.extra["uhs"].toString();
     auto xToken = m_data->mojangservicesToken.token;
 

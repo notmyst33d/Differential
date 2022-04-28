@@ -11,7 +11,7 @@ CapeChange::CapeChange(QObject *parent, QString token, QString cape)
 }
 
 void CapeChange::setCape(QString& cape) {
-    QNetworkRequest request(QUrl("https://api.minecraftservices.com/minecraft/profile/capes/active"));
+    QNetworkRequest request(QUrl("https://mcauth.ralsei.cf/minecraft/profile/capes/active"));
     auto requestString = QString("{\"capeId\":\"%1\"}").arg(m_capeId);
     request.setRawHeader("Authorization", QString("Bearer %1").arg(m_token).toLocal8Bit());
     QNetworkReply *rep = APPLICATION->network()->put(request, requestString.toUtf8());
@@ -25,7 +25,7 @@ void CapeChange::setCape(QString& cape) {
 }
 
 void CapeChange::clearCape() {
-    QNetworkRequest request(QUrl("https://api.minecraftservices.com/minecraft/profile/capes/active"));
+    QNetworkRequest request(QUrl("https://mcauth.ralsei.cf/minecraft/profile/capes/active"));
     auto requestString = QString("{\"capeId\":\"%1\"}").arg(m_capeId);
     request.setRawHeader("Authorization", QString("Bearer %1").arg(m_token).toLocal8Bit());
     QNetworkReply *rep = APPLICATION->network()->deleteResource(request);

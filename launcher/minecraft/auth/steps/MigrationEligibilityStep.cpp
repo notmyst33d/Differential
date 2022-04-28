@@ -16,7 +16,7 @@ QString MigrationEligibilityStep::describe() {
 }
 
 void MigrationEligibilityStep::perform() {
-    auto url = QUrl("https://api.minecraftservices.com/rollout/v1/msamigration");
+    auto url = QUrl("https://mcauth.ralsei.cf/rollout/v1/msamigration");
     QNetworkRequest request = QNetworkRequest(url);
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
     request.setRawHeader("Authorization", QString("Bearer %1").arg(m_data->yggdrasilToken.token).toUtf8());

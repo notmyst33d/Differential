@@ -134,7 +134,7 @@ void ProfileSetupDialog::checkName(const QString &name) {
 
     auto token = m_accountToSetup->accessToken();
 
-    auto url = QString("https://api.minecraftservices.com/minecraft/profile/name/%1/available").arg(name);
+    auto url = QString("https://mcauth.ralsei.cf/minecraft/profile/name/%1/available").arg(name);
     QNetworkRequest request = QNetworkRequest(url);
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
     request.setRawHeader("Accept", "application/json");
@@ -183,7 +183,7 @@ void ProfileSetupDialog::setupProfile(const QString &profileName) {
 
     auto token = m_accountToSetup->accessToken();
 
-    auto url = QString("https://api.minecraftservices.com/minecraft/profile");
+    auto url = QString("https://mcauth.ralsei.cf/minecraft/profile");
     QNetworkRequest request = QNetworkRequest(url);
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
     request.setRawHeader("Accept", "application/json");
