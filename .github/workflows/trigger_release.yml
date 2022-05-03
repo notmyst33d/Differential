@@ -23,7 +23,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           submodules: 'true'
-          path: 'PolyMC-source'
+          path: 'Differential-source'
       - name: Download artifacts
         uses: actions/download-artifact@v3
       - name: Grab and store version
@@ -32,19 +32,19 @@ jobs:
           echo "VERSION=$tag_name" >> $GITHUB_ENV
       - name: Package artifacts properly
         run: |
-          mv ${{ github.workspace }}/PolyMC-source PolyMC-${{ env.VERSION }}
-          mv PolyMC-Linux-Portable*/PolyMC-portable.tar.gz PolyMC-Linux-Portable-${{ env.VERSION }}.tar.gz
-          mv PolyMC-Linux*/PolyMC.tar.gz PolyMC-Linux-${{ env.VERSION }}.tar.gz
-          mv PolyMC-*.AppImage/PolyMC-*.AppImage PolyMC-Linux-${{ env.VERSION }}-x86_64.AppImage
-          mv PolyMC-macOS*/PolyMC.tar.gz PolyMC-macOS-${{ env.VERSION }}.tar.gz
+          mv ${{ github.workspace }}/Differential-source Differential-${{ env.VERSION }}
+          mv Differential-Linux-Portable*/Differential-portable.tar.gz Differential-Linux-Portable-${{ env.VERSION }}.tar.gz
+          mv Differential-Linux*/Differential.tar.gz Differential-Linux-${{ env.VERSION }}.tar.gz
+          mv Differential-*.AppImage/Differential-*.AppImage Differential-Linux-${{ env.VERSION }}-x86_64.AppImage
+          mv Differential-macOS*/Differential.tar.gz Differential-macOS-${{ env.VERSION }}.tar.gz
 
-          tar -czf PolyMC-${{ env.VERSION }}.tar.gz PolyMC-${{ env.VERSION }}
+          tar -czf Differential-${{ env.VERSION }}.tar.gz Differential-${{ env.VERSION }}
 
-          for d in PolyMC-Windows-*; do
+          for d in Differential-Windows-*; do
             cd "${d}" || continue
             ARCH="$(echo -n ${d} | cut -d '-' -f 3)"
             PORT="$(echo -n ${d} | grep -o Portable || true)"
-            NAME="PolyMC-Windows-${ARCH}"
+            NAME="Differential-Windows-${ARCH}"
             test -z "${PORT}" || NAME="${NAME}-Portable"
             zip -r -9 "../${NAME}-${{ env.VERSION }}.zip" *
             cd ..
@@ -57,16 +57,16 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.ref }}
-          name: PolyMC ${{ env.VERSION }}
+          name: Differential ${{ env.VERSION }}
           draft: true
           prerelease: false
           files: |
-            PolyMC-Linux-${{ env.VERSION }}.tar.gz
-            PolyMC-Linux-Portable-${{ env.VERSION }}.tar.gz
-            PolyMC-Linux-${{ env.VERSION }}-x86_64.AppImage
-            PolyMC-Windows-i686-${{ env.VERSION }}.zip
-            PolyMC-Windows-i686-Portable-${{ env.VERSION }}.zip
-            PolyMC-Windows-x86_64-${{ env.VERSION }}.zip
-            PolyMC-Windows-x86_64-Portable-${{ env.VERSION }}.zip
-            PolyMC-macOS-${{ env.VERSION }}.tar.gz
-            PolyMC-${{ env.VERSION }}.tar.gz
+            Differential-Linux-${{ env.VERSION }}.tar.gz
+            Differential-Linux-Portable-${{ env.VERSION }}.tar.gz
+            Differential-Linux-${{ env.VERSION }}-x86_64.AppImage
+            Differential-Windows-i686-${{ env.VERSION }}.zip
+            Differential-Windows-i686-Portable-${{ env.VERSION }}.zip
+            Differential-Windows-x86_64-${{ env.VERSION }}.zip
+            Differential-Windows-x86_64-Portable-${{ env.VERSION }}.zip
+            Differential-macOS-${{ env.VERSION }}.tar.gz
+            Differential-${{ env.VERSION }}.tar.gz

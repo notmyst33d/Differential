@@ -166,9 +166,9 @@ jobs:
           cmake --install ${{ env.BUILD_DIR }}
 
           cd ${{ env.INSTALL_DIR }}
-          chmod +x "PolyMC.app/Contents/MacOS/polymc"
-          sudo codesign --sign - --deep --force --entitlements "../program_info/App.entitlements" --options runtime "PolyMC.app/Contents/MacOS/polymc"
-          tar -czf ../PolyMC.tar.gz *
+          chmod +x "Differential.app/Contents/MacOS/differential"
+          sudo codesign --sign - --deep --force --entitlements "../program_info/App.entitlements" --options runtime "Differential.app/Contents/MacOS/differential"
+          tar -czf ../Differential.tar.gz *
 
       - name: Package (Windows)
         if: runner.os == 'Windows'
@@ -196,7 +196,7 @@ jobs:
           cmake --install ${{ env.BUILD_DIR }} --prefix ${{ env.INSTALL_DIR }}
 
           cd ${{ env.INSTALL_DIR }}
-          tar --owner root --group root -czf ../PolyMC.tar.gz *
+          tar --owner root --group root -czf ../Differential.tar.gz *
 
       - name: Package (Linux, portable)
         if: runner.os == 'Linux' && matrix.appimage != true
@@ -205,7 +205,7 @@ jobs:
           cmake --install ${{ env.BUILD_DIR }} --prefix ${{ env.INSTALL_PORTABLE_DIR }} --component portable
 
           cd ${{ env.INSTALL_PORTABLE_DIR }}
-          tar -czf ../PolyMC-portable.tar.gz *
+          tar -czf ../Differential-portable.tar.gz *
 
       - name: Package AppImage (Linux)
         if: runner.os == 'Linux' && matrix.appimage == true
@@ -213,7 +213,7 @@ jobs:
         run: |
           cmake --install ${{ env.BUILD_DIR }} --prefix ${{ env.INSTALL_APPIMAGE_DIR }}/usr
 
-          export OUTPUT="PolyMC-${{ runner.os }}-${{ env.VERSION }}-${{ inputs.build_type }}-x86_64.AppImage"
+          export OUTPUT="Differential-${{ runner.os }}-${{ env.VERSION }}-${{ inputs.build_type }}-x86_64.AppImage"
 
           chmod +x linuxdeploy-*.AppImage
 
@@ -230,7 +230,7 @@ jobs:
           LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${{ env.INSTALL_APPIMAGE_DIR }}/usr/lib/jvm/java-17-openjdk/lib"
           export LD_LIBRARY_PATH
 
-          ./linuxdeploy-x86_64.AppImage --appdir ${{ env.INSTALL_APPIMAGE_DIR }} --output appimage --plugin qt -i ${{ env.INSTALL_APPIMAGE_DIR }}/usr/share/icons/hicolor/scalable/apps/org.polymc.PolyMC.svg
+          ./linuxdeploy-x86_64.AppImage --appdir ${{ env.INSTALL_APPIMAGE_DIR }} --output appimage --plugin qt -i ${{ env.INSTALL_APPIMAGE_DIR }}/usr/share/icons/hicolor/scalable/apps/com.myst33d.Differential.svg
 
       ##
       # UPLOAD BUILDS
@@ -240,42 +240,42 @@ jobs:
         if: runner.os == 'macOS'
         uses: actions/upload-artifact@v3
         with:
-          name: PolyMC-${{ runner.os }}-${{ env.VERSION }}-${{ inputs.build_type }}
-          path: PolyMC.tar.gz
+          name: Differential-${{ runner.os }}-${{ env.VERSION }}-${{ inputs.build_type }}
+          path: Differential.tar.gz
 
       - name: Upload binary zip (Windows)
         if: runner.os == 'Windows'
         uses: actions/upload-artifact@v3
         with:
-          name: PolyMC-${{ matrix.name }}-${{ env.VERSION }}-${{ inputs.build_type }}
+          name: Differential-${{ matrix.name }}-${{ env.VERSION }}-${{ inputs.build_type }}
           path: ${{ env.INSTALL_DIR }}/**
 
       - name: Upload binary zip (Windows, portable)
         if: runner.os == 'Windows'
         uses: actions/upload-artifact@v3
         with:
-          name: PolyMC-${{ matrix.name }}-Portable-${{ env.VERSION }}-${{ inputs.build_type }}
+          name: Differential-${{ matrix.name }}-Portable-${{ env.VERSION }}-${{ inputs.build_type }}
           path: ${{ env.INSTALL_PORTABLE_DIR }}/**
 
       - name: Upload binary tarball (Linux)
         if: runner.os == 'Linux' && matrix.appimage != true
         uses: actions/upload-artifact@v3
         with:
-          name: PolyMC-${{ runner.os }}-${{ env.VERSION }}-${{ inputs.build_type }}
-          path: PolyMC.tar.gz
+          name: Differential-${{ runner.os }}-${{ env.VERSION }}-${{ inputs.build_type }}
+          path: Differential.tar.gz
 
       - name: Upload binary tarball (Linux, portable)
         if: runner.os == 'Linux' && matrix.appimage != true
         uses: actions/upload-artifact@v3
         with:
-          name: PolyMC-${{ runner.os }}-Portable-${{ env.VERSION }}-${{ inputs.build_type }}
-          path: PolyMC-portable.tar.gz
+          name: Differential-${{ runner.os }}-Portable-${{ env.VERSION }}-${{ inputs.build_type }}
+          path: Differential-portable.tar.gz
 
       - name: Upload AppImage (Linux)
         if: runner.os == 'Linux' && matrix.appimage == true
         uses: actions/upload-artifact@v3
         with:
-          name: PolyMC-${{ runner.os }}-${{ env.VERSION }}-${{ inputs.build_type }}-x86_64.AppImage
-          path: PolyMC-${{ runner.os }}-${{ env.VERSION }}-${{ inputs.build_type }}-x86_64.AppImage
+          name: Differential-${{ runner.os }}-${{ env.VERSION }}-${{ inputs.build_type }}-x86_64.AppImage
+          path: Differential-${{ runner.os }}-${{ env.VERSION }}-${{ inputs.build_type }}-x86_64.AppImage
 
 
