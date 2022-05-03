@@ -67,8 +67,11 @@ QString getCreditsHtml()
     stream.setCodec(QTextCodec::codecForName("UTF-8"));
     stream << "<center>\n";
 
+    stream << "<h3>" << QObject::tr("Differential Developers", "About Credits") << "</h3>\n";
+    stream << QString("<p>Myst33d %1</p>\n").arg(getGitHub("notmyst33d"));
+
     //: %1 is the name of the launcher, determined at build time, e.g. "PolyMC Developers"
-    stream << "<h3>" << QObject::tr("%1 Developers", "About Credits").arg(BuildConfig.LAUNCHER_NAME) << "</h3>\n";
+    stream << "<h3>" << QObject::tr("PolyMC Developers", "About Credits") << "</h3>\n";
     stream << QString("<p>LennyMcLennington %1</p>\n")          .arg(getGitHub("LennyMcLennington"));
     stream << QString("<p>Sefa Eyeoglu (Scrumplex) %1</p>\n")   .arg(getWebsite("https://scrumplex.net"));
     stream << QString("<p>dada513 %1</p>\n")                    .arg(getGitHub("dada513"));
@@ -79,7 +82,7 @@ QString getCreditsHtml()
     stream << "<br />\n";
 
     //: %1 is the name of the launcher, determined at build time, e.g. "PolyMC Contributors"
-    stream << "<h3>" << QObject::tr("%1 Contributors", "About Credits").arg(BuildConfig.LAUNCHER_NAME) << "</h3>\n";
+    stream << "<h3>" << QObject::tr("PolyMC Contributors", "About Credits") << "</h3>\n";
     stream << QString("<p>DioEgizio %1</p>\n")                      .arg(getGitHub("DioEgizio"));
     stream << QString("<p>flowln %1</p>\n")                      .arg(getGitHub("flowln"));
     stream << QString("<p>swirl %1</p>\n")                      .arg(getWebsite("https://swurl.xyz/"));

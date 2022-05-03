@@ -1184,7 +1184,7 @@ void Application::setIconTheme(const QString& name)
 QIcon Application::getThemedIcon(const QString& name)
 {
     if(name == "logo") {
-        return QIcon(":/org.polymc.PolyMC.svg");
+        return QIcon(":/com.myst33d.Differential.svg");
     }
     return XdgIcon::fromTheme(name);
 }

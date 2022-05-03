@@ -1,33 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop">
-  <id>org.polymc.PolyMC</id>
+  <id>com.myst33d.Differential</id>
   <provides>
-    <id>org.polymc.PolyMC</id>
+    <id>com.myst33d.Differential</id>
   </provides>
-  <launchable type="desktop-id">org.polymc.PolyMC.desktop</launchable>
-  <name>PolyMC</name>
-  <developer_name>PolyMC Team</developer_name>
-  <summary>A custom launcher for Minecraft that allows you to easily manage multiple installations of Minecraft at once</summary>
+  <launchable type="desktop-id">com.myst33d.Differential.desktop</launchable>
+  <name>Differential</name>
+  <developer_name>Myst33d, MultiMC, PolyMC Contributors</developer_name>
+  <summary>Minecraft launcher, but different.</summary>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0-only</project_license>
-  <url type="homepage">https://polymc.org/</url>
-  <url type="help">https://polymc.org/wiki/</url>
+  <url type="homepage">https://github.com/notmyst33d/Differential</url>
+  <url type="help">https://github.com/notmyst33d/Differential/issues</url>
   <description>
-    <p>PolyMC is a custom launcher for Minecraft that focuses on predictability, long term stability and simplicity.</p>
-    <p>Features:</p>
-    <ul>
-      <li>Easily install game modifications, such as Fabric or Forge</li>
-      <li>Control your java settings</li>
-      <li>Manage worlds and resource packs from the launcher</li>
-      <li>See logs and other details easily</li>
-      <li>Kill Minecraft in case of a crash/freeze</li>
-      <li>Isolate minecraft instances to keep everything clean</li>
-      <li>Install mods directly from the launcher</li>
-    </ul>
+    <p>Minecraft launcher, but different.</p>
   </description>
   <screenshots>
     <screenshot type="default">
-      <caption>The main PolyMC window</caption>
+      <caption>The main Differential window</caption>
       <image type="source" width="1011" height="994">https://polymc.org/img/screenshots/LauncherDark.png</image>
     </screenshot>
     <screenshot>

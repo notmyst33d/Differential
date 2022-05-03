@@ -1,24 +1,24 @@
 #/bin/bash
 
-inkscape -w 16 -h 16 -o polymc_16.png org.polymc.PolyMC.svg
-inkscape -w 24 -h 24 -o polymc_24.png org.polymc.PolyMC.svg
-inkscape -w 32 -h 32 -o polymc_32.png org.polymc.PolyMC.svg
-inkscape -w 48 -h 48 -o polymc_48.png org.polymc.PolyMC.svg
-inkscape -w 64 -h 64 -o polymc_64.png org.polymc.PolyMC.svg
-inkscape -w 128 -h 128 -o polymc_128.png org.polymc.PolyMC.svg
+inkscape -w 16 -h 16 -e differential_16.png com.myst33d.Differential.svg
+inkscape -w 24 -h 24 -e differential_24.png com.myst33d.Differential.svg
+inkscape -w 32 -h 32 -e differential_32.png com.myst33d.Differential.svg
+inkscape -w 48 -h 48 -e differential_48.png com.myst33d.Differential.svg
+inkscape -w 64 -h 64 -e differential_64.png com.myst33d.Differential.svg
+inkscape -w 128 -h 128 -e differential_128.png com.myst33d.Differential.svg
 
-convert polymc_128.png polymc_64.png polymc_48.png polymc_32.png polymc_24.png polymc_16.png polymc.ico
+convert differential_128.png differential_64.png differential_48.png differential_32.png differential_24.png differential_16.png differential.ico
 
-inkscape -w 256 -h 256 -o polymc_256.png org.polymc.PolyMC.svg
-inkscape -w 512 -h 512 -o polymc_512.png org.polymc.PolyMC.svg
-inkscape -w 1024 -h 1024 -o polymc_1024.png org.polymc.PolyMC.svg
+inkscape -w 256 -h 256 -e differential_256.png com.myst33d.Differential.svg
+inkscape -w 512 -h 512 -e differential_512.png com.myst33d.Differential.svg
+inkscape -w 1024 -h 1024 -e differential_1024.png com.myst33d.Differential.svg
 
-png2icns polymc.icns polymc_1024.png polymc_512.png polymc_256.png polymc_128.png polymc_32.png polymc_16.png
+png2icns differential.icns differential_1024.png differential_512.png differential_256.png differential_128.png differential_32.png differential_16.png
 
-rm -f polymc_*.png
-rm -rf polymc.iconset
+rm -f differential_*.png
+rm -rf differential.iconset
 
 for dir in ../launcher/resources/*/scalable
 do
-    cp -v org.polymc.PolyMC.svg $dir/launcher.svg
+    cp -v com.myst33d.Differential.svg $dir/launcher.svg
 done

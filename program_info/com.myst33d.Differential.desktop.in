@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Name=Differential
+Comment=Minecraft launcher, but different.
+Type=Application
+Terminal=false
+Exec=@Launcher_APP_BINARY_NAME@
+StartupNotify=true
+Icon=com.myst33d.Differential
+Categories=Game;
+Keywords=game;minecraft;launcher;
+StartupWMClass=Differential
