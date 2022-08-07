@@ -153,7 +153,7 @@ public: /* methods */
 
     // Get a list of downloads for this library
     QList<NetAction::Ptr> getDownloads(OpSys system, class HttpMetaCache * cache,
-                                     QStringList & failedLocalFiles, const QString & overridePath) const;
+                                     QStringList & failedLocalFiles, const QString & overridePath, const bool authlib) const;
 
 private: /* methods */
     /// the default storage prefix used by PolyMC

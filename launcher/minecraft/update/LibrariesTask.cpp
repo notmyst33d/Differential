@@ -15,6 +15,7 @@ void LibrariesTask::executeTask()
     setStatus(tr("Getting the library files from Mojang..."));
     qDebug() << m_inst->name() << ": downloading libraries";
     MinecraftInstance *inst = (MinecraftInstance *)m_inst;
+    bool authlib = false;
 
     // Build a list of URLs that will need to be downloaded.
     auto components = inst->getPackProfile();
@@ -34,7 +35,7 @@ void LibrariesTask::executeTask()
                 emitFailed(tr("Null jar is specified in the metadata, aborting."));
                 return false;
             }
-            auto dls = lib->getDownloads(currentSystem, metacache.get(), errors, localPath);
+            auto dls = lib->getDownloads(currentSystem, metacache.get(), errors, localPath, authlib);
             for(auto dl : dls)
             {
                 downloadJob->addNetAction(dl);
@@ -53,6 +54,14 @@ void LibrariesTask::executeTask()
         libArtifactPool.append(agent->library());
     }
     libArtifactPool.append(profile->getMainJar());
+
+    for (auto lib : libArtifactPool) {
+        if (lib->rawName().artifactId() == "authlib") {
+            qDebug() << "DAPI: Authlib detected";
+            authlib = true;
+        }
+    }
+
     processArtifactPool(libArtifactPool, failedLocalLibraries, inst->getLocalLibraryPath());
 
     QStringList failedLocalJarMods;

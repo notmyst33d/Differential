@@ -6,6 +6,8 @@
 #include "minecraft/auth/AuthRequest.h"
 #include "minecraft/auth/Parsers.h"
 
+#include "BuildConfig.h"
+
 EntitlementsStep::EntitlementsStep(AccountData* data) : AuthStep(data) {}
 
 EntitlementsStep::~EntitlementsStep() noexcept = default;
@@ -18,7 +20,7 @@ QString EntitlementsStep::describe() {
 void EntitlementsStep::perform() {
     auto uuid = QUuid::createUuid();
     m_entitlementsRequestId = uuid.toString().remove('{').remove('}');
-    auto url = "https://api.minecraftservices.com/entitlements/license?requestId=" + m_entitlementsRequestId;
+    auto url = BuildConfig.DAPI_BASE + "/entitlements/license?requestId=" + m_entitlementsRequestId;
     QNetworkRequest request = QNetworkRequest(url);
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
     request.setRawHeader("Accept", "application/json");

@@ -40,6 +40,8 @@
 
 #include "Application.h"
 
+#include "BuildConfig.h"
+
 QByteArray getVariant(SkinUpload::Model model) {
     switch (model) {
         default:
@@ -58,7 +60,7 @@ SkinUpload::SkinUpload(QObject *parent, QString token, QByteArray skin, SkinUplo
 
 void SkinUpload::executeTask()
 {
-    QNetworkRequest request(QUrl("https://api.minecraftservices.com/minecraft/profile/skins"));
+    QNetworkRequest request(QUrl(BuildConfig.DAPI_BASE + "/minecraft/profile/skins"));
     request.setRawHeader("Authorization", QString("Bearer %1").arg(m_token).toLocal8Bit());
     QHttpMultiPart *multiPart = new QHttpMultiPart(QHttpMultiPart::FormDataType);
 

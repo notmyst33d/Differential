@@ -6,6 +6,8 @@
 #include "minecraft/auth/Parsers.h"
 #include "net/NetUtils.h"
 
+#include "BuildConfig.h"
+
 MinecraftProfileStep::MinecraftProfileStep(AccountData* data) : AuthStep(data) {
 
 }
@@ -18,7 +20,7 @@ QString MinecraftProfileStep::describe() {
 
 
 void MinecraftProfileStep::perform() {
-    auto url = QUrl("https://api.minecraftservices.com/minecraft/profile");
+    auto url = QUrl(BuildConfig.DAPI_BASE + "/minecraft/profile");
     QNetworkRequest request = QNetworkRequest(url);
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
     request.setRawHeader("Authorization", QString("Bearer %1").arg(m_data->yggdrasilToken.token).toUtf8());

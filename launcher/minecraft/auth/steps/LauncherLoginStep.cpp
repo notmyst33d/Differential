@@ -7,6 +7,8 @@
 #include "minecraft/auth/AccountTask.h"
 #include "net/NetUtils.h"
 
+#include "BuildConfig.h"
+
 LauncherLoginStep::LauncherLoginStep(AccountData* data) : AuthStep(data) {
 
 }
@@ -18,7 +20,7 @@ QString LauncherLoginStep::describe() {
 }
 
 void LauncherLoginStep::perform() {
-    auto requestURL = "https://api.minecraftservices.com/launcher/login";
+    auto requestURL = BuildConfig.DAPI_BASE + "/launcher/login";
     auto uhs = m_data->mojangservicesToken.extra["uhs"].toString();
     auto xToken = m_data->mojangservicesToken.token;
 

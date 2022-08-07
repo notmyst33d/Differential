@@ -50,7 +50,7 @@ slots:
         QStringList failedFiles;
         Library test("test.package:testname:testversion");
         test.setRepositoryURL("file://foo/bar");
-        auto downloads = test.getDownloads(currentSystem, cache.get(), failedFiles, QString());
+        auto downloads = test.getDownloads(currentSystem, cache.get(), failedFiles, QString(), false);
         QCOMPARE(downloads.size(), 1);
         QCOMPARE(failedFiles, {});
         NetAction::Ptr dl = downloads[0];
@@ -62,7 +62,7 @@ slots:
         QCOMPARE(test.isNative(), false);
         QStringList failedFiles;
         test.setHint("local");
-        auto downloads = test.getDownloads(currentSystem, cache.get(), failedFiles, QString());
+        auto downloads = test.getDownloads(currentSystem, cache.get(), failedFiles, QString(), false);
         QCOMPARE(downloads.size(), 0);
         QCOMPARE(failedFiles, {"testname-testversion.jar"});
     }
@@ -72,7 +72,7 @@ slots:
         QCOMPARE(test.isNative(), false);
         QStringList failedFiles;
         test.setHint("local");
-        auto downloads = test.getDownloads(currentSystem, cache.get(), failedFiles, QFINDTESTDATA("testdata/Library"));
+        auto downloads = test.getDownloads(currentSystem, cache.get(), failedFiles, QFINDTESTDATA("testdata/Library"), false);
         QCOMPARE(downloads.size(), 0);
         qDebug() << failedFiles;
         QCOMPARE(failedFiles.size(), 0);
@@ -98,7 +98,7 @@ slots:
             QCOMPARE(native32, {});
             QCOMPARE(native64, {});
             QStringList failedFiles;
-            auto dls = test.getDownloads(Os_Linux, cache.get(), failedFiles, QString());
+            auto dls = test.getDownloads(Os_Linux, cache.get(), failedFiles, QString(), false);
             QCOMPARE(dls.size(), 1);
             QCOMPARE(failedFiles, {});
             auto dl = dls[0];
@@ -121,7 +121,7 @@ slots:
             QCOMPARE(native32, getStorage("test/package/testname/testversion/testname-testversion-linux-32.jar"));
             QCOMPARE(native64, getStorage("test/package/testname/testversion/testname-testversion-linux-64.jar"));
             QStringList failedFiles;
-            auto dls = test.getDownloads(Os_Linux, cache.get(), failedFiles, QString());
+            auto dls = test.getDownloads(Os_Linux, cache.get(), failedFiles, QString(), false);
             QCOMPARE(dls.size(), 2);
             QCOMPARE(failedFiles, {});
             QCOMPARE(dls[0]->m_url, QUrl("file://foo/bar/test/package/testname/testversion/testname-testversion-linux-32.jar"));
@@ -135,7 +135,7 @@ slots:
             QCOMPARE(native32, getStorage("test/package/testname/testversion/testname-testversion-windows-32.jar"));
             QCOMPARE(native64, getStorage("test/package/testname/testversion/testname-testversion-windows-64.jar"));
             QStringList failedFiles;
-            auto dls = test.getDownloads(Os_Windows, cache.get(), failedFiles, QString());
+            auto dls = test.getDownloads(Os_Windows, cache.get(), failedFiles, QString(), false);
             QCOMPARE(dls.size(), 2);
             QCOMPARE(failedFiles, {});
             QCOMPARE(dls[0]->m_url, QUrl("file://foo/bar/test/package/testname/testversion/testname-testversion-windows-32.jar"));
@@ -149,7 +149,7 @@ slots:
             QCOMPARE(native32, getStorage("test/package/testname/testversion/testname-testversion-osx-32.jar"));
             QCOMPARE(native64, getStorage("test/package/testname/testversion/testname-testversion-osx-64.jar"));
             QStringList failedFiles;
-            auto dls = test.getDownloads(Os_OSX, cache.get(), failedFiles, QString());
+            auto dls = test.getDownloads(Os_OSX, cache.get(), failedFiles, QString(), false);
             QCOMPARE(dls.size(), 2);
             QCOMPARE(failedFiles, {});
             QCOMPARE(dls[0]->m_url, QUrl("file://foo/bar/test/package/testname/testversion/testname-testversion-osx-32.jar"));
@@ -171,7 +171,7 @@ slots:
             QCOMPARE(native32, {QFileInfo(QFINDTESTDATA("testdata/Library/testname-testversion-linux-32.jar")).absoluteFilePath()});
             QCOMPARE(native64, {QFileInfo(QFINDTESTDATA("testdata/Library") + "/testname-testversion-linux-64.jar").absoluteFilePath()});
             QStringList failedFiles;
-            auto dls = test.getDownloads(Os_Linux, cache.get(), failedFiles, QFINDTESTDATA("testdata/Library"));
+            auto dls = test.getDownloads(Os_Linux, cache.get(), failedFiles, QFINDTESTDATA("testdata/Library"), false);
             QCOMPARE(dls.size(), 0);
             QCOMPARE(failedFiles, {QFileInfo(QFINDTESTDATA("testdata/Library") + "/testname-testversion-linux-64.jar").absoluteFilePath()});
         }
@@ -189,7 +189,7 @@ slots:
         }
         {
             QStringList failedFiles;
-            auto dls = test->getDownloads(Os_Linux, cache.get(), failedFiles, QString());
+            auto dls = test->getDownloads(Os_Linux, cache.get(), failedFiles, QString(), false);
             QCOMPARE(dls.size(), 1);
             QCOMPARE(failedFiles, {});
             QCOMPARE(dls[0]->m_url, QUrl("https://libraries.minecraft.net/com/paulscode/codecwav/20101023/codecwav-20101023.jar"));
@@ -205,7 +205,7 @@ slots:
         }
         {
             QStringList failedFiles;
-            auto dls = test->getDownloads(Os_Linux, cache.get(), failedFiles, QFINDTESTDATA("testdata/Library"));
+            auto dls = test->getDownloads(Os_Linux, cache.get(), failedFiles, QFINDTESTDATA("testdata/Library"), false);
             QCOMPARE(dls.size(), 0);
             QCOMPARE(failedFiles, {});
         }
@@ -224,7 +224,7 @@ slots:
         }
         {
             QStringList failedFiles;
-            auto dls = test->getDownloads(Os_Linux, cache.get(), failedFiles, QFINDTESTDATA("testdata/Library"));
+            auto dls = test->getDownloads(Os_Linux, cache.get(), failedFiles, QFINDTESTDATA("testdata/Library"), false);
             QCOMPARE(dls.size(), 0);
             QCOMPARE(failedFiles, {});
         }
@@ -239,7 +239,7 @@ slots:
         QCOMPARE(native32, {});
         QCOMPARE(native64, {});
         QStringList failedFiles;
-        auto dls = test->getDownloads(Os_OSX, cache.get(), failedFiles, QString());
+        auto dls = test->getDownloads(Os_OSX, cache.get(), failedFiles, QString(), false);
         QCOMPARE(dls.size(), 1);
         QCOMPARE(failedFiles, {});
         QCOMPARE(dls[0]->m_url, QUrl("https://libraries.minecraft.net/org/lwjgl/lwjgl/lwjgl-platform/2.9.4-nightly-20150209/lwjgl-platform-2.9.4-nightly-20150209-natives-osx.jar"));
@@ -254,7 +254,7 @@ slots:
         QCOMPARE(native32, getStorage("tv/twitch/twitch-platform/5.16/twitch-platform-5.16-natives-windows-32.jar"));
         QCOMPARE(native64, getStorage("tv/twitch/twitch-platform/5.16/twitch-platform-5.16-natives-windows-64.jar"));
         QStringList failedFiles;
-        auto dls = test->getDownloads(Os_Windows, cache.get(), failedFiles, QString());
+        auto dls = test->getDownloads(Os_Windows, cache.get(), failedFiles, QString(), false);
         QCOMPARE(dls.size(), 2);
         QCOMPARE(failedFiles, {});
         QCOMPARE(dls[0]->m_url, QUrl("https://libraries.minecraft.net/tv/twitch/twitch-platform/5.16/twitch-platform-5.16-natives-windows-32.jar"));

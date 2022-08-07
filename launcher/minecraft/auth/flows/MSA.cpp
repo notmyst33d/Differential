@@ -9,11 +9,13 @@
 #include "minecraft/auth/steps/MinecraftProfileStep.h"
 #include "minecraft/auth/steps/GetSkinStep.h"
 
+#include "BuildConfig.h"
+
 MSASilent::MSASilent(AccountData* data, QObject* parent) : AuthFlow(data, parent) {
     m_steps.append(new MSAStep(m_data, MSAStep::Action::Refresh));
     m_steps.append(new XboxUserStep(m_data));
-    m_steps.append(new XboxAuthorizationStep(m_data, &m_data->xboxApiToken, "http://xboxlive.com", "Xbox"));
-    m_steps.append(new XboxAuthorizationStep(m_data, &m_data->mojangservicesToken, "rp://api.minecraftservices.com/", "Mojang"));
+    m_steps.append(new XboxAuthorizationStep(m_data, &m_data->xboxApiToken, BuildConfig.DAPI_BASE, "Xbox"));
+    m_steps.append(new XboxAuthorizationStep(m_data, &m_data->mojangservicesToken, "rp://" + BuildConfig.DAPI_HOST_PORT + "/", "Mojang"));
     m_steps.append(new LauncherLoginStep(m_data));
     m_steps.append(new XboxProfileStep(m_data));
     m_steps.append(new EntitlementsStep(m_data));
@@ -27,8 +29,8 @@ MSAInteractive::MSAInteractive(
 ) : AuthFlow(data, parent) {
     m_steps.append(new MSAStep(m_data, MSAStep::Action::Login));
     m_steps.append(new XboxUserStep(m_data));
-    m_steps.append(new XboxAuthorizationStep(m_data, &m_data->xboxApiToken, "http://xboxlive.com", "Xbox"));
-    m_steps.append(new XboxAuthorizationStep(m_data, &m_data->mojangservicesToken, "rp://api.minecraftservices.com/", "Mojang"));
+    m_steps.append(new XboxAuthorizationStep(m_data, &m_data->xboxApiToken, BuildConfig.DAPI_BASE, "Xbox"));
+    m_steps.append(new XboxAuthorizationStep(m_data, &m_data->mojangservicesToken, "rp://" + BuildConfig.DAPI_HOST_PORT + "/", "Mojang"));
     m_steps.append(new LauncherLoginStep(m_data));
     m_steps.append(new XboxProfileStep(m_data));
     m_steps.append(new EntitlementsStep(m_data));

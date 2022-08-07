@@ -48,7 +48,8 @@ QList<NetAction::Ptr> Library::getDownloads(
     OpSys system,
     class HttpMetaCache* cache,
     QStringList& failedLocalFiles,
-    const QString & overridePath
+    const QString & overridePath,
+    const bool authlib
 ) const
 {
     QList<NetAction::Ptr> out;
@@ -90,6 +91,16 @@ QList<NetAction::Ptr> Library::getDownloads(
 
         // Don't add a time limit for the libraries cache entry validity
         options |= Net::Download::Option::MakeEternal;
+        if(authlib && rawName().artifactId() == "authlib")
+        {
+            qDebug() << "DAPI: Redirecting " + rawName().serialize() + " to " + BuildConfig.DAPI_RESOURCE_BASE;
+            out.append(Net::Download::makeCached(url.replace("https://libraries.minecraft.net", BuildConfig.DAPI_RESOURCE_BASE), entry, options));
+            return true;
+        } else if (!authlib && rawName().artifactId() == "minecraft") {
+            qDebug() << "DAPI: Redirecting " + rawName().serialize() + " to " + BuildConfig.DAPI_RESOURCE_BASE;
+            out.append(Net::Download::makeCached(url.replace("https://launcher.mojang.com", BuildConfig.DAPI_RESOURCE_BASE), entry, options));
+            return true;
+        }
 
         if(sha1.size())
         {
